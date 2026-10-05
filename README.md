@@ -3,9 +3,9 @@
 Kdy a kolik zalévat pokojové rostliny. Jednoduchá webová appka, která běží jen
 v prohlížeči: žádný účet, žádný server, data zůstávají u tebe.
 
-**Vyzkoušet:** https://mikimaly.github.io/zalivka/
-**Stáhnout:** soubor `zalivka.html` z [Releases](https://github.com/MikiMaly/zalivka/releases/latest),
-otevřít dvojklikem. Funguje i offline (jen písmo se bez internetu nahradí systémovým).
+**Spuštění:** stáhni zdrojový kód (Code → Download ZIP, nebo `git clone`) a sestav ho
+(viz Vývoj níže). Výsledkem je jediný soubor `dist/index.html`, který stačí otevřít
+v prohlížeči dvojklikem. Funguje i offline (jen písmo se bez internetu nahradí systémovým).
 
 ## Co umí
 
@@ -50,15 +50,14 @@ dat prohlížeče je smaže i ze Zálivky, proto se hodí občas stáhnout zálo
 ```bash
 npm install
 npm run dev      # http://localhost:5173
-npm run build    # dist/index.html, jeden soběstačný soubor
+npm run build    # dist/index.html, jeden soběstačný soubor (stačí otevřít v prohlížeči)
 ```
+
+Potřebuješ [Node.js](https://nodejs.org) 20 nebo novější.
 
 React + TypeScript + Vite + Tailwind 4. Výpočet je v `src/model.ts`, úložiště v
 `src/store.ts`, UI v `src/App.tsx`. Vzhled vychází z vizuální identity
 [mmaly.cz](https://mmaly.cz).
-
-- push do `main` → nasazení na GitHub Pages (`.github/workflows/pages.yml`)
-- nový Release na GitHubu (tag `vX.Y.Z`) → workflow k němu přibalí `zalivka.html` (`.github/workflows/release.yml`)
 
 ## Licence
 
@@ -68,4 +67,4 @@ React + TypeScript + Vite + Tailwind 4. Výpočet je v `src/model.ts`, úložiš
 
 **English:** a small browser-only app that tells you when and how much to water
 your houseplants (Czech UI). No account, no server, data stays in your browser.
-Download `zalivka.html` from Releases and open it, or use the GitHub Pages link above.
+Download the source, run `npm install && npm run build` and open `dist/index.html`.
