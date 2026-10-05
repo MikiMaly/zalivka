@@ -1,16 +1,16 @@
-# Tag vX.Y.Z → GitHub Release se souborem zalivka.html ke stažení.
-#   git tag v1.0.0 && git push origin v1.0.0
+# Vydání verze: GitHub → Releases → Draft a new release → tag vX.Y.Z → Publish.
+# Workflow pak k vydání přibalí sestavený soubor zalivka.html ke stažení.
 name: Release
 
 on:
-  push:
-    tags: ['v*']
+  release:
+    types: [published]
 
 permissions:
   contents: write
 
 jobs:
-  release:
+  attach:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,6 +21,6 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: cp dist/index.html zalivka.html
-      - run: gh release create "$GITHUB_REF_NAME" zalivka.html --title "Zálivka $GITHUB_REF_NAME" --generate-notes
+      - run: gh release upload "${{ github.event.release.tag_name }}" zalivka.html --clobber
         env:
           GH_TOKEN: ${{ github.token }}

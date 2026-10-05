@@ -58,7 +58,7 @@ React + TypeScript + Vite + Tailwind 4. Výpočet je v `src/model.ts`, úložiš
 [mmaly.cz](https://mmaly.cz).
 
 - push do `main` → nasazení na GitHub Pages (`.github/workflows/pages.yml`)
-- tag `vX.Y.Z` → Release se souborem `zalivka.html` (`.github/workflows/release.yml`)
+- nový Release na GitHubu (tag `vX.Y.Z`) → workflow k němu přibalí `zalivka.html` (`.github/workflows/release.yml`)
 
 ## Licence
 
