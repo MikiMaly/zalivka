@@ -1,0 +1,502 @@
+@custom-variant dark (&:is(.dark *));
+
+/* ==========================================================================
+   mmaly.cz 2.0 — vizuální identita "Skleník"
+   --------------------------------------------------------------------------
+   Tmavé sklo v noci, uvnitř roste zeleň. Zelená (#22c55e) zůstává hlavní
+   barvou značky, k ní patří mint a akvamarín jako chladné doprovodné tóny
+   a malina jako jediný teplý akcent (pozornost, admin, mazání, "hoří").
+
+   Převzato z mmaly.cz (MikiMaly/hub, src/styles/theme.css). Hex kódy žijí
+   jen v bloku "Paleta"; komponenty berou sémantické tokeny (primary, mint,
+   aqua, raspberry, ...) nebo třídy .hub-* níže.
+   ========================================================================== */
+
+:root {
+  /* ---- Paleta --------------------------------------------------------- */
+  --hub-green: #22c55e;       /* značka, primární akce */
+  --hub-green-deep: #15803d;  /* stisk, tmavší varianta */
+  --hub-mint: #9ef0cc;        /* jemné zvýraznění, eyebrow, popisky */
+  --hub-aqua: #3ee0c3;        /* akvamarín: voda, info, odkazy, hover */
+  --hub-raspberry: #e8336f;   /* malina: akcent, admin, chyba, urgentní */
+  --hub-apricot: #f5a65b;     /* meruňka: varování, "brzy" */
+
+  --hub-ink: #070e0d;         /* pozadí stránky */
+  --hub-ink-2: #0c1715;       /* karta */
+  --hub-ink-3: #12211e;       /* sekundární plocha, inputy */
+  --hub-ink-4: #1a2e2a;       /* hover, muted */
+  --hub-text: #e4f1ec;        /* text */
+  --hub-text-dim: #8ba59d;    /* sekundární text */
+
+  /* ---- Sémantické tokeny (shadcn konvence, berou je Tailwind třídy) ---- */
+  --font-size: 16px;
+  --background: var(--hub-ink);
+  --foreground: var(--hub-text);
+  --card: var(--hub-ink-2);
+  --card-foreground: var(--hub-text);
+  --popover: var(--hub-ink-2);
+  --popover-foreground: var(--hub-text);
+  --primary: var(--hub-green);
+  --primary-foreground: #04110a;
+  --secondary: var(--hub-ink-3);
+  --secondary-foreground: var(--hub-text);
+  --muted: var(--hub-ink-4);
+  --muted-foreground: var(--hub-text-dim);
+  --accent: var(--hub-aqua);
+  --accent-foreground: #03130f;
+  --destructive: var(--hub-raspberry);
+  --destructive-foreground: #ffffff;
+  --border: rgba(158, 240, 204, 0.09);
+  --border-strong: rgba(158, 240, 204, 0.18);
+  --input: transparent;
+  --input-background: var(--hub-ink-3);
+  --switch-background: var(--hub-ink-4);
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: var(--hub-aqua);
+
+  /* stavy: ok / brzy / hoří / info */
+  --success: var(--hub-green);
+  --warning: var(--hub-apricot);
+  --danger: var(--hub-raspberry);
+  --info: var(--hub-aqua);
+
+  /* grafy: pořadí, ve kterém se barvy berou pro série */
+  --chart-1: var(--hub-green);
+  --chart-2: var(--hub-aqua);
+  --chart-3: var(--hub-raspberry);
+  --chart-4: var(--hub-apricot);
+  --chart-5: var(--hub-mint);
+
+  /* přechody značky */
+  --hub-aurora: linear-gradient(120deg, var(--hub-green) 0%, var(--hub-aqua) 55%, var(--hub-mint) 100%);
+  --hub-bloom: linear-gradient(120deg, var(--hub-raspberry) 0%, #ff6f91 100%);
+
+  --radius: 0.875rem;
+}
+
+@theme inline {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* barvy značky jako Tailwind třídy: text-mint, bg-aqua/10, border-raspberry/30 ... */
+  --color-leaf: var(--hub-green);
+  --color-leaf-deep: var(--hub-green-deep);
+  --color-mint: var(--hub-mint);
+  --color-aqua: var(--hub-aqua);
+  --color-raspberry: var(--hub-raspberry);
+  --color-apricot: var(--hub-apricot);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    font-size: var(--font-size);
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    /* jemné zrno skla */
+    background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--hub-aqua) 35%, transparent);
+    color: var(--hub-text);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--hub-aqua);
+    outline-offset: 2px;
+  }
+
+  select option {
+    background: var(--hub-ink-2);
+  }
+}
+
+/* ==========================================================================
+   Komponenty značky — čisté CSS třídy.
+   ========================================================================== */
+@layer components {
+  /* ---- Pozadí stránky: skleněné tabulky skleníku + záře ------------------ */
+  .hub-page {
+    position: relative;
+    min-height: 100vh;
+    background-color: var(--background);
+    color: var(--foreground);
+    isolation: isolate;
+  }
+  .hub-page::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(158, 240, 204, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(158, 240, 204, 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, black 0%, transparent 75%);
+  }
+  .hub-page::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+      radial-gradient(40rem 26rem at 12% -8%, color-mix(in srgb, var(--hub-green) 14%, transparent), transparent 70%),
+      radial-gradient(34rem 22rem at 92% 4%, color-mix(in srgb, var(--hub-aqua) 10%, transparent), transparent 70%),
+      radial-gradient(22rem 16rem at 70% 110%, color-mix(in srgb, var(--hub-raspberry) 7%, transparent), transparent 70%);
+  }
+
+  .hub-container {
+    width: 100%;
+    max-width: 1600px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) { .hub-container { padding-inline: 1.5rem; } }
+  @media (min-width: 1024px) { .hub-container { padding-inline: 2.5rem; } }
+
+  /* ---- Horní lišta ------------------------------------------------------ */
+  .hub-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: color-mix(in srgb, var(--hub-ink) 72%, transparent);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ---- Karta: matné sklo s jemnou horní hranou -------------------------- */
+  .hub-card {
+    position: relative;
+    border-radius: 1.125rem;
+    background:
+      linear-gradient(180deg, rgba(158, 240, 204, 0.035), transparent 40%),
+      var(--card);
+    border: 1px solid var(--border);
+    box-shadow:
+      inset 0 1px 0 rgba(228, 241, 236, 0.04),
+      0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  .hub-card-hover {
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .hub-card-hover:hover {
+    border-color: color-mix(in srgb, var(--hub-aqua) 38%, transparent);
+    box-shadow:
+      inset 0 1px 0 rgba(228, 241, 236, 0.06),
+      0 12px 40px -18px color-mix(in srgb, var(--hub-aqua) 45%, transparent);
+  }
+  /* barevný proužek vlevo pro stavové karty: .hub-card + .hub-edge-ok ... */
+  .hub-edge-ok, .hub-edge-warn, .hub-edge-danger, .hub-edge-info { overflow: hidden; }
+  .hub-edge-ok::before, .hub-edge-warn::before, .hub-edge-danger::before, .hub-edge-info::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+  }
+  .hub-edge-ok::before { background: var(--success); }
+  .hub-edge-warn::before { background: var(--warning); }
+  .hub-edge-danger::before { background: var(--danger); }
+  .hub-edge-info::before { background: var(--info); }
+
+  /* ---- Typografie ------------------------------------------------------- */
+  .hub-display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+  }
+  .hub-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+  /* malý mono nadpis nad sekcí — podpis identity */
+  .hub-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--hub-mint);
+  }
+  .hub-eyebrow::before {
+    content: '';
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 999px;
+    background: var(--hub-green);
+    box-shadow: 0 0 10px var(--hub-green);
+  }
+  .hub-eyebrow-raspberry { color: color-mix(in srgb, var(--hub-raspberry) 70%, white); }
+  .hub-eyebrow-raspberry::before { background: var(--hub-raspberry); box-shadow: 0 0 10px var(--hub-raspberry); }
+  .hub-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+  .hub-num {
+    font-family: var(--font-display);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .hub-text-aurora {
+    background: var(--hub-aurora);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ---- Tlačítka --------------------------------------------------------- */
+  .hub-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+    cursor: pointer;
+  }
+  .hub-btn:active:not(:disabled) { transform: translateY(1px); }
+  .hub-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .hub-btn-sm { min-height: 2rem; padding: 0.375rem 0.75rem; font-size: 0.8rem; border-radius: 0.625rem; }
+  .hub-btn-lg { min-height: 3.25rem; padding: 0.875rem 1.5rem; font-size: 1rem; border-radius: 0.875rem; }
+  .hub-btn-icon { min-height: 2.25rem; width: 2.25rem; padding: 0; }
+
+  .hub-btn-primary {
+    background: var(--hub-green);
+    color: var(--primary-foreground);
+    box-shadow: 0 6px 24px -10px color-mix(in srgb, var(--hub-green) 70%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+  .hub-btn-primary:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--hub-green) 88%, var(--hub-mint));
+    box-shadow: 0 8px 30px -8px color-mix(in srgb, var(--hub-green) 80%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .hub-btn-soft {
+    background: color-mix(in srgb, var(--hub-green) 12%, transparent);
+    color: var(--hub-green);
+    border-color: color-mix(in srgb, var(--hub-green) 22%, transparent);
+  }
+  .hub-btn-soft:hover:not(:disabled) { background: color-mix(in srgb, var(--hub-green) 20%, transparent); }
+  .hub-btn-aqua {
+    background: color-mix(in srgb, var(--hub-aqua) 12%, transparent);
+    color: var(--hub-aqua);
+    border-color: color-mix(in srgb, var(--hub-aqua) 24%, transparent);
+  }
+  .hub-btn-aqua:hover:not(:disabled) { background: color-mix(in srgb, var(--hub-aqua) 20%, transparent); }
+  .hub-btn-ghost {
+    background: color-mix(in srgb, var(--hub-ink-3) 70%, transparent);
+    color: var(--foreground);
+    border-color: var(--border);
+  }
+  .hub-btn-ghost:hover:not(:disabled) { background: var(--hub-ink-4); border-color: var(--border-strong); }
+  .hub-btn-quiet {
+    background: transparent;
+    color: var(--muted-foreground);
+  }
+  .hub-btn-quiet:hover:not(:disabled) { color: var(--foreground); background: var(--hub-ink-3); }
+  .hub-btn-danger {
+    background: color-mix(in srgb, var(--hub-raspberry) 12%, transparent);
+    color: color-mix(in srgb, var(--hub-raspberry) 80%, white);
+    border-color: color-mix(in srgb, var(--hub-raspberry) 24%, transparent);
+  }
+  .hub-btn-danger:hover:not(:disabled) { background: color-mix(in srgb, var(--hub-raspberry) 22%, transparent); }
+
+  /* ---- Formuláře -------------------------------------------------------- */
+  .hub-input {
+    width: 100%;
+    min-height: 2.5rem;
+    padding: 0.5rem 0.875rem;
+    border-radius: 0.75rem;
+    background: var(--input-background);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+    font-size: 0.875rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .hub-input::placeholder { color: color-mix(in srgb, var(--muted-foreground) 70%, transparent); }
+  .hub-input:hover { border-color: var(--border-strong); }
+  .hub-input:focus {
+    outline: none;
+    border-color: color-mix(in srgb, var(--hub-aqua) 60%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--hub-aqua) 16%, transparent);
+  }
+  .hub-input-lg { min-height: 3rem; font-size: 1rem; }
+
+  /* přepínač segmentů (taby, filtry) */
+  .hub-segment {
+    display: inline-flex;
+    gap: 0.25rem;
+    padding: 0.25rem;
+    border-radius: 0.875rem;
+    background: var(--hub-ink-3);
+    border: 1px solid var(--border);
+  }
+  .hub-segment > button {
+    flex: 1;
+    padding: 0.45rem 0.9rem;
+    border-radius: 0.625rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted-foreground);
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .hub-segment > button:hover { color: var(--foreground); }
+  .hub-segment > button[aria-pressed='true'],
+  .hub-segment > button[aria-selected='true'] {
+    background: var(--hub-ink-4);
+    color: var(--foreground);
+    box-shadow: inset 0 0 0 1px var(--border-strong);
+  }
+
+  /* ---- Štítky ----------------------------------------------------------- */
+  .hub-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.6rem;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    color: var(--muted-foreground);
+    background: var(--hub-ink-3);
+    border: 1px solid var(--border);
+  }
+  .hub-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+  .hub-pill-ok { background: color-mix(in srgb, var(--success) 14%, transparent); color: color-mix(in srgb, var(--success) 85%, white); }
+  .hub-pill-warn { background: color-mix(in srgb, var(--warning) 15%, transparent); color: var(--warning); }
+  .hub-pill-danger { background: color-mix(in srgb, var(--danger) 15%, transparent); color: color-mix(in srgb, var(--danger) 75%, white); }
+  .hub-pill-info { background: color-mix(in srgb, var(--info) 13%, transparent); color: var(--info); }
+  .hub-pill-neutral { background: var(--hub-ink-4); color: var(--muted-foreground); }
+
+  /* ---- Ikonová dlaždice (ikona appky, avatar sekce) --------------------- */
+  .hub-icon-tile {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.875rem;
+    color: var(--hub-mint);
+    background:
+      linear-gradient(140deg, color-mix(in srgb, var(--hub-green) 22%, transparent), color-mix(in srgb, var(--hub-aqua) 8%, transparent));
+    border: 1px solid color-mix(in srgb, var(--hub-green) 22%, transparent);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+  .hub-icon-tile-raspberry {
+    color: color-mix(in srgb, var(--hub-raspberry) 70%, white);
+    background: linear-gradient(140deg, color-mix(in srgb, var(--hub-raspberry) 22%, transparent), color-mix(in srgb, var(--hub-apricot) 6%, transparent));
+    border-color: color-mix(in srgb, var(--hub-raspberry) 24%, transparent);
+  }
+  .hub-icon-tile-aqua {
+    color: var(--hub-aqua);
+    background: linear-gradient(140deg, color-mix(in srgb, var(--hub-aqua) 20%, transparent), color-mix(in srgb, var(--hub-mint) 6%, transparent));
+    border-color: color-mix(in srgb, var(--hub-aqua) 24%, transparent);
+  }
+
+  /* ---- Odkaz zpět ------------------------------------------------------- */
+  .hub-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.85rem;
+    color: var(--muted-foreground);
+    transition: color 0.15s ease;
+  }
+  .hub-back:hover { color: var(--hub-mint); }
+
+  /* ---- Oddělovač a toast ------------------------------------------------ */
+  .hub-divider { border-top: 1px dashed var(--border-strong); }
+  .hub-toast {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--foreground);
+    background: color-mix(in srgb, var(--hub-ink-4) 92%, transparent);
+    border: 1px solid color-mix(in srgb, var(--hub-aqua) 30%, transparent);
+    box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+  }
+}
